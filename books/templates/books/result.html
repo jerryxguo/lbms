@@ -1,0 +1,60 @@
+
+<html>
+<head>
+<style>
+table, th, td {
+    border: 1px solid black;
+}
+caption {
+    text-align: center;
+    margin-bottom: 5px;   
+    font-size: 160%;
+    padding: 5px;
+    font-weight: bold;
+}
+</style>
+</head>
+<body>
+
+<h1 align="center">ICS Library Content </h1>
+
+{% if latest_book_list %}
+    <ul>
+        <table>
+          
+          <tr>
+            <th>Number</th>
+            <th>Name</th>
+            <th>Author</th>
+            <th>Catalogue</th>
+            <th>Level</th>
+            <th>Borrower</th>
+            <th>Status</th>
+            <th>Creation Date</th>
+            <th>Modification Date</th>
+          </tr>
+          {% for book in latest_book_list%}
+              <tr>
+                <td width="5%">{{forloop.counter}}</td>
+                <td width="15%">{{book.title}}</td>
+                <td width="15%">{{book.author}}</td>
+                <td width="10%">{{book.catalogue}}</td>
+                <td width="5%">{{book.level}}</td>
+                <td width="10%">{{book.borrower}}  ({{book.schoolClass}})</td>
+                {% if book.available %}
+                    <td width="6%">Available</td>
+                {% else %}
+                    <td bgcolor="#FF0000" width="6%">On Loan</td>
+                {% endif %}  
+                <td width="15%" >{{book.creation_date}}</td>
+                <td width="15%" >{{book.modified_date}}</td>
+              </tr>
+          {% endfor %}
+        </table>         
+    </ul>
+{% else %}
+    <p>No books are available.</p>
+{% endif %}
+
+</body>
+</html>
